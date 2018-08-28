@@ -28,7 +28,8 @@
 (define >> bind_)
 
 (define (<or> ms)
-  (if ms
+  (if (null? ms)
+      (lambda (_) #f)
       (lambda (l)
         (let* ((m (car ms)) (v (m l)))
           (if v
@@ -37,7 +38,6 @@
               )
           )
         )
-      (lambda (_) #f)
       ))
 
 (define (then f g)
