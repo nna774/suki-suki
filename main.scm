@@ -137,8 +137,9 @@
   (let ((stdin (readAll (standard-input-port))))
     (>>
      (set '() stdin)
-     (lambda (x) (print (getVal (readSExp x))))
-     )))
+     (lambda (x) (print (eval (readSExp x))))
+     )
+    0))
 
 ;; (define (main z)
 ;;   (print (takeWhile '(1 2 3 4 5 6 7 8 9 0) (lambda (x) (< x 5))))
