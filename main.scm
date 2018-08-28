@@ -95,16 +95,16 @@
      (then_ readOpen readClose)
      ))l))
 
-(define (takeWhile l pred)
-  (define (takeWhileImp l pred res)
-    (if (pred (car l))
-        (takeWhileImp (cdr l) pred (cons
-			            (cdr l)
-			            (cons (car l)
-				          (cdr res))))
+(define (takeWhile xs pred)
+  (define (takeWhileImp xs pred res)
+    (if (or (null? xs) (not(pred (car xs))))
         res
+        (takeWhileImp (cdr xs) pred (cons
+			             (cdr xs)
+			             (cons (car xs)
+				           (cdr res))))
         ))
-  (let ((res (takeWhileImp l pred (cons l '()))))
+  (let ((res (takeWhileImp xs pred (cons xs '()))))
     (cons
      (car res) ; rest
      (reverse (cdr res)) ; got
