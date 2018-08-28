@@ -11,9 +11,9 @@
       #f))
 
 (define (set _l v)
-  (list v '()))
+  (cons v '()))
 (define (get l)
-  (list (getEnv l) (getEnv l)))
+  (cons (getEnv l) (getEnv l)))
 
 (define (bind v f)
   (if v
@@ -65,7 +65,7 @@
 (define (readNil l)
   (if ((then_ readQuote
               (then_ readOpen readClose)) l)
-      (list
+      (cons
        (cdddr l)
        '()
        )
@@ -78,7 +78,6 @@
         res
         (toIntImp (cdr xs) (+ (* res 10) (digit->integer (car xs))))))
   (toIntImp xs 0))
-
 
 (define (readInt l)
   (let* ((v (takeWhile l char-numeric?)) (n (cdr v)))
